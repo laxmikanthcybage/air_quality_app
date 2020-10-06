@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+<title>Home</title>
+{% block content %}
+    <div class="container">
+        <center>
+        <h1>{{ mesg }}</h1>
+        </center>
+    </div>
+    {% if zipcode %}
+        {{ zipcode }}
+    {% endif %}
+    {% if api %}
+        {% if api == "Error..." %}
+            There was an error, Please try again...
+        {% else %}
+            {% for i in modified_api %}
+                <div class="jumbotron {{ i.category_color }}">
+                    <h1 class="display-6">Area : {{ i.ReportingArea }}</h1>
+                    <p class="lead">Air Quality : {{ i.AQI }} &nbsp&nbsp  Category : {{ i.Category.Name }}</p>
+                    {{ i.category_description }}
+                </div>
+                <br/>
+            {% endfor %}
+        {% endif %}
+    {% endif %}
+{% endblock %}
